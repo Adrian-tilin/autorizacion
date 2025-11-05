@@ -43,3 +43,5 @@ async def forbidden_handler(request: Request, exc: HTTPException):
         {"request": request, "user": user, "message": exc.detail},
         status_code=403,
     )
+
+app = app 
