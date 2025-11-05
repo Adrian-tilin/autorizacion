@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Sistema de Autenticación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .welcome {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .user-info {
+            background: #ecfdf5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #10b981;
+        }
+        .links {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #3b82f6;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        .btn-success {
+            background: #10b981;
+        }
+        .btn-success:hover {
+            background: #059669;
+        }
+        .btn-danger {
+            background: #ef4444;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        .info {
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 Página de Inicio</h1>
+        
+        <div class="welcome">
+            <h2>¡Bienvenido al Sistema de Autenticación!</h2>
+            <p style="margin-top: 10px;">Esta es una página <strong>pública</strong> accesible para todos.</p>
+        </div>
+
+        {% if user %}
+            <div class="user-info">
+                <p><strong>👤 Usuario:</strong> {{ user.name }}</p>
+                <p><strong>🎭 Rol:</strong> {{ user.role }}</p>
+            </div>
+            
+            <div class="links">
+                <a href="/informe" class="btn btn-success">📊 Ver Informe</a>
+                {% if user.role == "admin" %}
+                    <a href="/admon" class="btn btn-primary">⚙️ Panel Admin</a>
+                {% endif %}
+                <a href="/logout" class="btn btn-danger">🚪 Cerrar Sesión</a>
+            </div>
+        {% else %}
+            <div class="info">
+                <p>No has iniciado sesión. Inicia sesión para acceder a más funciones.</p>
+            </div>
+            
+            <div class="links">
+                <a href="/login" class="btn btn-primary">🔐 Iniciar Sesión</a>
+            </div>
+        {% endif %}
+
+        <div class="info">
+            <p><strong>Usuarios de prueba:</strong></p>
+            <p>👤 user / 1234 (Usuario normal)</p>
+            <p>👑 admon / admin (Administrador)</p>
+        </div>
+    </div>
+</body>
+</html>

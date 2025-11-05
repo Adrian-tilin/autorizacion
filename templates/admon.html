@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - Sistema de Autenticación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .admin-badge {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border-left: 4px solid #f59e0b;
+            font-weight: bold;
+        }
+        .section {
+            margin: 30px 0;
+        }
+        .section h2 {
+            color: #555;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f59e0b;
+            padding-bottom: 10px;
+        }
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .users-table th {
+            background: #f59e0b;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        .users-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        .users-table tr:hover {
+            background: #fef3c7;
+        }
+        .role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .role-admin {
+            background: #fecaca;
+            color: #991b1b;
+        }
+        .role-user {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #fffbeb;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #f59e0b;
+        }
+        .stat-card h3 {
+            color: #f59e0b;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        .stat-card p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .links {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #3b82f6;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        .btn-secondary {
+            background: #6b7280;
+        }
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        .btn-danger {
+            background: #ef4444;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚙️ Panel de Administración</h1>
+        
+        <div class="admin-badge">
+            👑 Acceso de Administrador - {{ user.name }}
+        </div>
+
+        <div class="section">
+            <h2>Estadísticas del Sistema</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>{{ users|length }}</h3>
+                    <p>Total de Usuarios</p>
+                </div>
+                <div class="stat-card">
+                    <h3>100%</h3>
+                    <p>Sistema Operativo</p>
+                </div>
+                <div class="stat-card">
+                    <h3>24/7</h3>
+                    <p>Disponibilidad</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Gestión de Usuarios</h2>
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user_item in users %}
+                    <tr>
+                        <td>{{ user_item.username }}</td>
+                        <td>{{ user_item.name }}</td>
+                        <td>
+                            <span class="role-badge role-{{ user_item.role }}">
+                                {% if user_item.role == "admin" %}👑{% else %}👤{% endif %}
+                                {{ user_item.role }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Acciones Rápidas</h2>
+            <div class="stat-card">
+                <p>✅ Sistema actualizado correctamente</p>
+                <p>🔒 Todos los usuarios tienen contraseñas seguras</p>
+                <p>📊 Los informes están disponibles para todos los usuarios autenticados</p>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="/" class="btn btn-secondary">🏠 Inicio</a>
+            <a href="/informe" class="btn btn-primary">📊 Ver Informe</a>
+            <a href="/logout" class="btn btn-danger">🚪 Cerrar Sesión</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe - Sistema de Autenticación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .user-info {
+            background: #ecfdf5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border-left: 4px solid #10b981;
+        }
+        .report-section {
+            margin: 30px 0;
+        }
+        .report-section h2 {
+            color: #555;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        .stat-box {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .stat-box h3 {
+            color: #3b82f6;
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        .stat-box p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .links {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #3b82f6;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        .btn-secondary {
+            background: #6b7280;
+        }
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        .btn-danger {
+            background: #ef4444;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Informe del Sistema</h1>
+        
+        <div class="user-info">
+            <p><strong>👤 Usuario:</strong> {{ user.name }}</p>
+            <p><strong>🎭 Rol:</strong> {{ user.role }}</p>
+        </div>
+
+        <div class="report-section">
+            <h2>Estadísticas Generales</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3>1,234</h3>
+                    <p>Total de Usuarios</p>
+                </div>
+                <div class="stat-box">
+                    <h3>567</h3>
+                    <p>Sesiones Activas</p>
+                </div>
+                <div class="stat-box">
+                    <h3>89%</h3>
+                    <p>Tasa de Éxito</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="report-section">
+            <h2>Actividad Reciente</h2>
+            <div class="stat-box">
+                <p>✅ Última actualización: Hoy a las 14:30</p>
+                <p>📈 Tendencia: Crecimiento del 15% esta semana</p>
+                <p>⚠️ Alertas pendientes: 3</p>
+            </div>
+        </div>
+
+        <div class="report-section">
+            <h2>Resumen Mensual</h2>
+            <div class="stat-box">
+                <p><strong>Mes actual:</strong> Noviembre 2025</p>
+                <p><strong>Días transcurridos:</strong> 5</p>
+                <p><strong>Proyección:</strong> Cumplimiento del 95% de objetivos</p>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="/" class="btn btn-secondary">🏠 Inicio</a>
+            {% if user.role == "admin" %}
+                <a href="/admon" class="btn btn-primary">⚙️ Panel Admin</a>
+            {% endif %}
+            <a href="/logout" class="btn btn-danger">🚪 Cerrar Sesión</a>
+        </div>
+    </div>
+</body>
+</html>
